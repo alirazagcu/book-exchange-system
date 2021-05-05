@@ -53,7 +53,7 @@ export const GET_NOTIFICATION_FAILED = "GET_NOTIFICATION_FAILED"
 export const GET_NOTIFICATION_LOADING= "GET_NOTIFICATION_LOADING"
 export const GET_NOTIFICATION_RESET = "GET_NOTIFICATION_RESET"
 
-const baseUrl = "http://ec2-15-206-157-166.ap-south-1.compute.amazonaws.com/"
+const baseUrl = "http://ec2-15-206-157-166.ap-south-1.compute.amazonaws.com"
 // const localBaseUrl = "http://localhost:3000/api/v1/"
 const signUp = (data) => ({
         type: SIGNUP,
