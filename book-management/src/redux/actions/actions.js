@@ -53,7 +53,7 @@ export const GET_NOTIFICATION_FAILED = "GET_NOTIFICATION_FAILED"
 export const GET_NOTIFICATION_LOADING= "GET_NOTIFICATION_LOADING"
 export const GET_NOTIFICATION_RESET = "GET_NOTIFICATION_RESET"
 
-const baseUrl = "http://ec2-15-206-157-166.ap-south-1.compute.amazonaws.com"
+const baseUrl = "http://ec2-15-206-157-166.ap-south-1.compute.amazonaws.com/api/v1/"
 // const localBaseUrl = "http://localhost:3000/api/v1/"
 const signUp = (data) => ({
         type: SIGNUP,
@@ -137,7 +137,7 @@ export const resetgetUserBooks = (ms) => ({
 
 
 export const signUpService = (data) =>{
-    const request = axios.post(`${baseUrl}/user/registerUser`,data);
+    const request = axios.post(`${baseUrl}user/registerUser`,data);
 
     return (dispatch) => {
         dispatch(signUpLoading(true));
@@ -176,7 +176,7 @@ export const signUpService = (data) =>{
 
 
 export const signInService = (data) =>{
-    const request = axios.post(`${baseUrl}/user/signInUser`,data);
+    const request = axios.post(`${baseUrl}user/signInUser`,data);
 
     return (dispatch) => {
         dispatch(signInLoading(true));
@@ -215,7 +215,7 @@ export const signInService = (data) =>{
 
 
 export const getAllBooks = (data) =>{
-    const request = axios.post(`${baseUrl}/books/signInUser`,data);
+    const request = axios.post(`${baseUrl}books/signInUser`,data);
 
     return (dispatch) => {
         dispatch(signInLoading(true));
