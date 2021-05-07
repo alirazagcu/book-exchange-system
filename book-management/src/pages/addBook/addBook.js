@@ -92,7 +92,7 @@ const handleChange = (e) => {
               <Para text="How it works?" />
             </div>
             <div className="text-center pt-3 text-gray-500">
-              <Para text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." />
+              <Para text="Add a book to sell, with title, author, category and description and get contact details of potential buyer!" />
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@ const handleChange = (e) => {
                     onChange={handleChange}
                     rows="7"
                     className="resize-none w-full outline-none pl-2 pt-2 bg-gray-100 border-gray-200 border-opacity-30 focus:outline-none focus:ring-1 focus:ring-blue-600"
-                    placeholder="Write Cooking Process..."
+                    placeholder="Write Book Description..."
                   ></textarea>
                 </div>
               </div>

@@ -70,19 +70,34 @@ function Nav(props) {
         </div>
         {/* responsive menu */}
         {showMenu ? 
+        role == "seller" ?
         <div className="fixed right-0 top-0 bottom-0 h-full z-50 text-white bg-black w-4/5">
-             <div className="pt-6">
-               <div className="pt-4 text-2xl text-right w-full pr-4" onClick={()=>{setShowMenu(false)}}> &times;</div>
-               <div className="w-full flex justify-center pt-4">
-             <ul>
-                    <li className="cursor-pointer hover:text-blue-400 transition duration-500 ease-in-out"><Link to="/books">Home</Link></li>
-                    <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out "><Link to="/add-book">Add Book</Link></li>
-                    <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out "><Link to="/book-status">Your Books</Link></li>
-                    <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out"><Link to={{pathname: '/', state: {from: 'signOut'}}}>Sign out</Link></li>
-                </ul>
-                </div>
-               </div>
-        </div>
+        <div className="pt-6">
+          <div className="pt-4 text-2xl text-right w-full pr-4" onClick={()=>{setShowMenu(false)}}> &times;</div>
+          <div className="w-full flex justify-center pt-4">
+        <ul>
+               <li className="cursor-pointer hover:text-blue-400 transition duration-500 ease-in-out"><Link to="/books">Home</Link></li>
+               <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out "><Link to="/add-book">Add Book</Link></li>
+               <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out "><Link to="/book-status">Your Books</Link></li>
+               <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out "><Link to="/book-track">Books Track</Link></li>
+               <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out"><Link to={{pathname: '/', state: {from: 'signOut'}}}>Sign out</Link></li>
+           </ul>
+           </div>
+          </div>
+       </div>
+        :
+        <div className="fixed right-0 top-0 bottom-0 h-full z-50 text-white bg-black w-4/5">
+        <div className="pt-6">
+          <div className="pt-4 text-2xl text-right w-full pr-4" onClick={()=>{setShowMenu(false)}}> &times;</div>
+          <div className="w-full flex justify-center pt-4">
+        <ul>
+               <li className="cursor-pointer hover:text-blue-400 transition duration-500 ease-in-out"><Link to="/books">Home</Link></li>
+               <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out "><Link to="/book-track">Book Track</Link></li>
+               <li className="cursor-pointer hover:text-blue-400 mt-3 transition duration-500 ease-in-out"><Link to={{pathname: '/', state: {from: 'signOut'}}}>Sign out</Link></li>
+           </ul>
+           </div>
+          </div>
+       </div>
         :""}
         {/* responsive menu */}
       </>

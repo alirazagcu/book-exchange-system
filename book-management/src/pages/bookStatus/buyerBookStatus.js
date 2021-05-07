@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Nav from "../../components/navBar/navBar";
 import Footer from "../../components/footer/footer";
+import Chatboot from "../../components/chatbot/chatbot";
 import DeleteIcon from '@material-ui/icons/Delete';
 import AssignmentTurnedInRoundedIcon from '@material-ui/icons/AssignmentTurnedInRounded';
 import EventAvailableIcon from '@material-ui/icons/EventAvailable';
@@ -224,6 +225,7 @@ function BookStatus(props) {
         }
      </Row>
       <Footer />
+      <Chatboot />
     </React.Fragment>
   );
 }
