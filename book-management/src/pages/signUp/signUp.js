@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Input from "../../components/input/input";
 import google from "../../assets/images/google.png";
 import fb from "../../assets/images/fb.png";
@@ -14,14 +14,20 @@ import withReducer from "../../store/withReducer";
 import Loader from "../../components/Loader/Loader";
 import SnackBarMsg from "../../components/ErrorMessage/ErrorSnackBar";
 import setAuthorizationToken from "../../utils/authorization/authorization";
+import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props'
+import { GoogleLogin } from 'react-google-login';
+import RoleModel from "../../components/model/roleModel";
 
 function Signup(props) {
   const dispatch = useDispatch();
   const history= useHistory();
   const [isLoading, setIsLoading] = useState(false)
+  const [open, setOpen] = React.useState(false);
   const [isSnackbar, setIsSnackBar] = useState(false);
   const [snackBarMesssage, setSnackBarMessage] = useState("");
   const [snackBarSverity, setSnackBarSverity] = useState("error");
+  const [socialMediaRole, setSocialMediaRole] = useState("")
+  const [socialMediaObject, setSocialMediaObject] = useState({})
   const [inputValueState, setInputValueState] = React.useState({
       inputValues:{
         first_name : "",
@@ -33,8 +39,6 @@ function Signup(props) {
     }
   }
   )
-
-
 
   const add_confirmation = useSelector(
     ({ SignUpReducers }) => SignUpReducers.signUpReducers
@@ -50,12 +54,12 @@ function Signup(props) {
       sign_in_confirmation.data = {};
       dispatch(Actions.signOut(true));
       dispatch(Actions.resetSignIn({}));
+      setOpen(false)
     }
   }, [props.location.state])
 
 
   React.useEffect(() => {
-    console.log(add_confirmation.data, "data")
     if (add_confirmation.data && add_confirmation.data.success === true) {
       setIsLoading(false)
       localStorage.setItem('token', add_confirmation.data.user.token);
@@ -64,6 +68,7 @@ function Signup(props) {
       history.push({
         pathname: "/books"
       })
+      setOpen(false)
     }
     else if (add_confirmation.isLoading) {
       setIsLoading(true);
@@ -76,6 +81,34 @@ function Signup(props) {
     }
 
   }, [add_confirmation, dispatch]);
+
+  React.useEffect(() => {
+    if (sign_in_confirmation.data && sign_in_confirmation.data.success === true) {
+      setIsLoading(false)
+      localStorage.setItem('token', sign_in_confirmation.data.user.token);
+      localStorage.setItem('userName', sign_in_confirmation.data.user.userName);
+      setAuthorizationToken(sign_in_confirmation.data.user.token)
+      history.push({
+        pathname: "/books"
+      })
+      setOpen(false)
+    }
+    if (sign_in_confirmation.errMsg) {
+      setOpen(true)
+    }
+
+  }, [sign_in_confirmation, dispatch]);
+
+  useEffect(()=>{
+    if(socialMediaRole){
+      const obj = { 
+        ...socialMediaObject,
+        role: socialMediaRole
+      }
+      dispatch(Actions.signUpService(obj))
+      setOpen(false)
+    }
+  }, [socialMediaRole])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -106,8 +139,53 @@ function Signup(props) {
         }
     })
   }
+
+  const responseFacebook = (response) => {
+    const {status, name, userID} = response;
+    if(!status && response){
+      const loginVerifier = {
+        email: `${userID}@gamil.com`,
+        password: "12345678"
+      }
+      dispatch(Actions.signInService(loginVerifier))
+      const socialMediaObject = {
+        first_name : name,
+        last_name : name,
+        email : `${userID}@gamil.com`,
+        password : "12345678",
+        confirm_password:"12345678",
+        role: "buyer"
+      }
+      setSocialMediaObject(socialMediaObject)
+    }
+  }
+
+  const responseGoogle = (response) =>{
+    const {error, profileObj}= response;
+    if(!error && response){
+      const loginVerifier = {
+        email: profileObj.email,
+        password: "12345678"
+      }
+      dispatch(Actions.signInService(loginVerifier))
+      const socialMediaObject = {
+        first_name : profileObj.name,
+        last_name : profileObj.name,
+        email : profileObj.email,
+        password : "12345678",
+        confirm_password:"12345678",
+        role: "buyer"
+      }
+      setSocialMediaObject(socialMediaObject)
+    }
+  }
+
+  const handleClose = () =>{
+    setOpen(false)
+  }
   return (
     <div>
+    <RoleModel open={open} handleCloseCallBack={handleClose} setSocialMediaRole={setSocialMediaRole}/>
       {isSnackbar && <SnackBarMsg snackBarSverity={snackBarSverity} snackBarMesssage={snackBarMesssage} setIsSnackBar={setIsSnackBar}/>}
     {
       isLoading 
@@ -161,14 +239,34 @@ function Signup(props) {
         </div>
         <div className="flex justify-center pt-4">
           <div>
-            <button className="flex items-center mr-2 border-2 border-blue-600 border-opacity-40 focus:outline-none rounded pt-1 pb-1 pl-3 pr-3 text-white text-lg hover:bg-blue-500">
-              <img src={google} className="mr-2" alt="google"/>Google
-            </button>
+          <GoogleLogin
+            clientId="721068158804-q5kdp74uge5me0pe2lkd72nu5gui6lai.apps.googleusercontent.com"
+            render={renderProps => (
+              <button onClick={renderProps.onClick} 
+                className="flex items-center mr-2 border-2 border-blue-600 border-opacity-40 focus:outline-none rounded pt-1 pb-1 pl-3 pr-3 text-white text-lg hover:bg-blue-500">
+                <img src={google} className="mr-2" alt="google"/>Google
+              </button>
+              )}
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
+            
           </div>
           <div>
-            <button className="flex items-center ml-2 border-2 border-blue-600 border-opacity-40 focus:outline-none rounded pt-1 pb-1 pl-3 pr-3 text-white text-lg hover:bg-blue-500">
-            <img src={fb} className="mr-2" alt="facebook"/>Facebook
-            </button>
+            <FacebookLogin
+              appId="2635221203443734"
+              autoLoad
+              callback={responseFacebook}
+              render={renderProps => (
+                <button onClick={renderProps.onClick}
+                    className="flex items-center ml-2 border-2 border-blue-600 border-opacity-40 focus:outline-none rounded pt-1 pb-1 pl-3 pr-3 text-white text-lg hover:bg-blue-500">
+                  <img src={fb} className="mr-2" alt="facebook"/>Facebook
+                </button>
+              )}
+            />
+            
           </div>
         </div>
         <div className="flex justify-center pt-4 text-gray-700 text-sm">
