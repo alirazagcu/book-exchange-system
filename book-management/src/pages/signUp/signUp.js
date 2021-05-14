@@ -257,7 +257,7 @@ function Signup(props) {
           <div>
             <FacebookLogin
               appId="2635221203443734"
-              autoLoad
+              autoLoad={false}
               callback={responseFacebook}
               render={renderProps => (
                 <button onClick={renderProps.onClick}
