@@ -19,6 +19,8 @@ function Search({onSearchClickHandler}) {
         }
     })
   }
+
+
   
   const searchSubmitHandler = () =>{
     onSearchClickHandler(inputValueState.inputValues)
@@ -35,7 +37,7 @@ function Search({onSearchClickHandler}) {
             <select 
               name="field" 
               id="select" 
-              className="w-1/4 lg:w-1/5 xl:w-1/5 2xl:w-1/5 text-xs lg:text-base xl:text-base 2xl:text-base bg-white border-l border-gray-200 focus:outline-none pr-0 lg:pr-2 xl:pr-2 2xl:pr-2 pl-2 font-semibold"
+              className="bg-white border-l border-gray-200 focus:outline-none font-semibold"
               onChange={handleChange}
             >
               <option >Search By</option>
@@ -44,6 +46,17 @@ function Search({onSearchClickHandler}) {
               <option value="category">Category</option>
               <option value="keyword">Keyword</option>
             </select>   
+
+            <select 
+              name="book_condition" 
+              id="condition" 
+              className="bg-white border-l border-gray-200 focus:outline-none font-semibold"
+              onChange={handleChange}
+            >
+              <option>Condition</option>
+              <option value="new">New</option>
+              <option value="old">Old</option>
+            </select> 
             <div
               onClick={searchSubmitHandler} 
               className="bg-gray-900 w-1/4 lg:w-1/5 xl:w-1/5 2xl:w-1/5 text-xs lg:text-lg xl:text-lg 2xl:text-lg flex items-center justify-center rounded-r-full  cursor-pointer hover:text-blue-500 rounded text-white  pr-2 pl-2 pt-2 pb-2 focus:outline-none">

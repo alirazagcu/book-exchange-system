@@ -26,6 +26,8 @@ function Addbook() {
       category : "",
       book_name : "",
       w3review:"",
+      book_price: 0,
+      general_condition: "new"
   }
 }
 )
@@ -37,6 +39,7 @@ React.useEffect(() => {
 const handleSubmit = (e) => {
   e.preventDefault();
   const {inputValues}   = inputValueState;
+  console.log(inputValues)
   dispatch(Actions.addBook(inputValues))
 };
 
@@ -114,19 +117,36 @@ const handleChange = (e) => {
                   </div>
                   <p className="font-bold text-sm pb-1  ">Select cover</p>
                 </div>
-                <div className="flex ">
+                <div className="flex">
                   <input
                     type="file"
                     id="img"
                     name="img"
                     accept="image/*"
                     required
-                    className="focus:outline-none w-full "
+                    className="focus:outline-none "
                     name="image"
                     onChange={handleChange}
                   />
+                  <div>
+                  <label
+                    className="ml-5 font-bold text-sm"
+                  >
+                  General Condition:
+                    <select
+                    style={{width:"100px"}}
+                      className="ml-2  bg-gray-100 font-bold  bg-transparent text-black text-base"
+                      name="general_condition"
+                      onChange={handleChange}
+                    >            
+                      <option value="new">New</option>
+                      <option value="old">Old</option>
+                    </select>
+                  </label>
+                  </div>
                 </div>
               </div>
+              <div className="flex justify-between items-center pt-4">
                 <div className="w-2/5 pt-4">
                   <input
                     type="text"
@@ -137,6 +157,19 @@ const handleChange = (e) => {
                     className="w-full border rounded-full bg-gray-100 border-gray-200 border-opacity-30 focus:outline-none focus:ring-1 focus:ring-blue-600  bg-transparent pt-2 pb-2 pl-2 outline-none text-black text-base"
                   />
                 </div>
+                <div className="w-2/5 pt-4">
+                <input
+                    type="number"
+                    placeholder="Book Price"
+                    pattern="[0-9]*"
+                    name="book_price"
+                    onChange={handleChange}
+                    required
+                    className="w-full border rounded-full bg-gray-100 border-gray-200 border-opacity-30 focus:outline-none focus:ring-1 focus:ring-blue-600  bg-transparent pt-2 pb-2 pl-2 outline-none text-black text-base"
+                  />
+                </div>
+              </div>
+
                 <div className="flex justify-between items-center pt-4">
                 <div className="w-2/5">
                   <input

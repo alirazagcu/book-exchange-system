@@ -54,7 +54,7 @@ export const GET_NOTIFICATION_LOADING= "GET_NOTIFICATION_LOADING"
 export const GET_NOTIFICATION_RESET = "GET_NOTIFICATION_RESET"
 
 const baseUrl = "http://ec2-15-206-157-166.ap-south-1.compute.amazonaws.com/api/v1/"
-// const localBaseUrl = "http://localhost:3000/api/v1/"
+const localBaseUrl = "http://localhost:8080/api/v1/"
 const signUp = (data) => ({
         type: SIGNUP,
         payload: data
@@ -260,6 +260,8 @@ export const addBook = (data) => {
     newData.append("author_name", data.author_name);
     newData.append("category", data.category)
     newData.append("description", data.w3review)
+    newData.append("book_price", data.book_price)
+    newData.append("general_condition", data.general_condition)
     const request = axios.post(`${baseUrl}book/addBook`,
     newData,
     );

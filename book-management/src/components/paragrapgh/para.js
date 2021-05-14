@@ -1,11 +1,10 @@
 function Para(props) {
-    const { text} = props;
+    const { text, color} = props;
     return (
       <div className="w-full">
-        <p>{text}</p>
+        <p style={{color}}>{text}</p>
       </div>
     );
   }
   
   export default Para;
-  

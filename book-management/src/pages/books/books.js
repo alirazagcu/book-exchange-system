@@ -208,6 +208,9 @@ function Books() {
                                   <div className="w-full text-center text-sm">
                                   <Para text={`By: ${bookData.author}`} />
                                   </div>
+                                  <div className="w-full text-center text-md">
+                                  <Para color="#FF0000" text={`Price: $${bookData.price || 30}`} />
+                                  </div>
                                   <div className="text-sm pt-2">
                                   <Para text={bookData.description} />
                                   </div>
@@ -243,6 +246,9 @@ function Books() {
                               <div className="w-full text-center text-sm">
                                 <Para text={`By: ${bookData.author}`} />
                               </div>
+                                <div className="w-full text-center text-md">
+                                  <Para color="#FF0000" text={`Price: $${bookData.price || 30}`} />
+                                </div>
                               <div className="text-sm pt-2">
                                 <Para text={bookData.description}  />
                               </div>
@@ -276,6 +282,9 @@ function Books() {
                               </div>
                               <div className="w-full text-center text-sm">
                               <Para text={`By: ${bookData.author}`} />
+                              </div>
+                              <div className="w-full text-center text-md">
+                                <Para color="#FF0000" text={`Price: $${bookData.price || 30}`} />
                               </div>
                               <div className="text-sm pt-2">
                               <Para text={bookData.description} />

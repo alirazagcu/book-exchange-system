@@ -133,6 +133,7 @@ function BookStatus(props) {
   const deleteButtonClick = (data) => {
     dispatch(Actions.delteBook({book_id: data.id}))
   }
+
   const columns = [
     {
       name: 'Book Name',
@@ -146,6 +147,12 @@ function BookStatus(props) {
       // right: true,
     },
     {
+      name: 'Book Price',
+      selector: 'book_price',
+      sortable: true,
+      // right: true,
+    },
+    {
       name: "Current Status",
       selector: 'status',
       sortable: true,
@@ -154,7 +161,7 @@ function BookStatus(props) {
       name : "Actions",
       cell: (row) => (
         <>
-        {row.status !=="booked" && (
+        {row.status =="new" && (
           <>
                     <Button
                     variant="contained" 
@@ -168,10 +175,20 @@ function BookStatus(props) {
                     variant="contained" 
                     color="secondary"
                     onClick={() => deleteButtonClick(row)} 
-                    startIcon={<DeleteIcon/>}
+                    // startIcon={<DeleteIcon/>}
                     size="small">Delete
                     </Button>
          </>
+          )}
+          {row.status =="Booked" && (
+          <div className="text-center font-bold text-md">
+             Book Booked
+         </div>
+          )}
+          {row.status =="sold" && (
+          <div className="text-center font-bold text-md">
+             Book Sold
+         </div>
           )}
         </>        
 
