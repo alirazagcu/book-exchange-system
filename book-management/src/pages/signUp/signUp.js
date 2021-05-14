@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Input from "../../components/input/input";
+import Nav from "../../components/navBar/navBar";
+
 import google from "../../assets/images/google.png";
 import fb from "../../assets/images/fb.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,6 +57,9 @@ function Signup(props) {
       dispatch(Actions.signOut(true));
       dispatch(Actions.resetSignIn({}));
       setOpen(false)
+      history.push({
+        pathname: "/"
+      })
     }
   }, [props.location.state])
 
@@ -62,11 +67,11 @@ function Signup(props) {
   React.useEffect(() => {
     if (add_confirmation.data && add_confirmation.data.success === true) {
       setIsLoading(false)
-      localStorage.setItem('token', add_confirmation.data.user.token);
+      localStorage.setItem('token', add_confirmation.data.user.token);  
       localStorage.setItem('userName', add_confirmation.data.user.userName);
       setAuthorizationToken(add_confirmation.data.user.token)
       history.push({
-        pathname: "/books"
+        pathname: "/"
       })
       setOpen(false)
     }
@@ -89,7 +94,7 @@ function Signup(props) {
       localStorage.setItem('userName', sign_in_confirmation.data.user.userName);
       setAuthorizationToken(sign_in_confirmation.data.user.token)
       history.push({
-        pathname: "/books"
+        pathname: "/"
       })
       setOpen(false)
     }
@@ -194,7 +199,7 @@ function Signup(props) {
       <div className="flex">
       <div className="hidden lg:block xl:block 2xl:block sign-up w-3/5">
       </div>
-      <div className=" w-full  lg:w-2/5 xl:w-2/5 2xl:w-2/5 h-screen bg-gray-900  flex flex-col justify-center items-center" required>
+      <div className=" w-full lg:w-2/5 xl:w-2/5 2xl:w-2/5 h-screen bg-gray-900  flex flex-col justify-center items-center">
         <form onSubmit={handleSubmit} className="w-3/5">
           <div className="flex justify-center pb-2">
             <p className="text-2xl font-semibold text-white text-lg">Sign Up</p>
@@ -214,7 +219,7 @@ function Signup(props) {
             <Input placeholder="Email" type="email" name={"email"}  onChange={handleChange}/>
           </div>
           <div className="pt-2">
-            <Input placeholder="Password" type="password" name={"password"}  onChange={handleChange}/>
+            <Input placeholder="Fassword" type="password" name={"password"}  onChange={handleChange}/>
           </div>
           <div className="pt-2">
             <Input placeholder="Confirm Password" type="password" name={"confirm_password"}  onChange={handleChange}/>

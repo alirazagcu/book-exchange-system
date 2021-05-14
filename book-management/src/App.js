@@ -32,8 +32,8 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <PrivateRoute component={Signup} publicValue ={true} userRole={"both"}  path="/" exact />
-          <PrivateRoute component={Books} publicValue ={false} userRole={"both"} path="/books" exact/>
+          <PrivateRoute component={Books} publicValue ={true} userRole={"both"}  path="/" exact />
+          <PrivateRoute component={Signup} publicValue ={true} userRole={"both"} path="/sign-up" exact/>
           <PrivateRoute component={Signin} publicValue ={true} userRole={"both"} path="/sign-in" exact/>
           <PrivateRoute component={Addbook} publicValue ={false} userRole={"seller"} path="/add-book" exact/>
           <PrivateRoute component={BookStatus} publicValue ={false} userRole={"seller"} path="/book-status" exact/>

@@ -19,6 +19,9 @@ import Loader from "../../components/Loader/Loader";
 import SnackBarMsg from "../../components/ErrorMessage/ErrorSnackBar";
 import Pagination from '@material-ui/lab/Pagination';
 import { makeStyles } from '@material-ui/core/styles';
+import {
+  useHistory
+} from "react-router-dom";
 
 import "./book.css";
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 function Books() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [open, setOpen] = React.useState(false);
   const [booksRows, setBooksRows] = useState([])
   const [bookId, setBookId] = useState("")
@@ -140,6 +144,7 @@ function Books() {
     setOpen(false);
   };
   const handleBuy = (id)=> {
+    if (!localStorage.token)  history.push('/sign-in')
     handleClickOpen()
     setBookId(id)
   }

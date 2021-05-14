@@ -8,7 +8,7 @@ import {
     Link
   } from "react-router-dom";
 function Footer(props) {
-  const [role, setRole] = useState("buyer");
+  const [role, setRole] = useState("");
   useEffect(()=> {
     const token = window.localStorage.getItem('token');
     let decodedToken = {}
@@ -24,6 +24,7 @@ function Footer(props) {
   return (
     <div className="flex justify-center pt-12 pb-10 bg-gray-900">
       <div className="w-11/12  xl:w-4/5 2xl:w-2/5">
+       
         <div className="flex flex-col  lg:flex-row xl:flex-row 2xl:flex-row justify-between text-white">
           <div className="w-full lg:w-3/12 xl:w-3/12 2xl:w-3/12">
             <div>
@@ -39,27 +40,28 @@ function Footer(props) {
           </div>
           <div className="w-full lg:w-3/12 xl:w-3/12 2xl:w-3/12 pb-4 lg:pb-0 xl:pb-0 2xl:pb-0">
             <div className="pt-1">
-              <h1 className="font-semibold pb-2 lg:pb-3 xl:pb-3 2xl:pb-3">Navigation</h1>
+              { role && <h1 className="font-semibold pb-2 lg:pb-3 xl:pb-3 2xl:pb-3">Navigation</h1>}
             </div>
             {
               role == "seller" ? 
               <div className="text-sm w-1/3  lg:w-3/12 xl:w-3/12 2xl:w-3/12">
               <ul className="text-gray-300 w-full">
-              <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to="/books">Home</Link></li>
+              <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to="/">Home</Link></li>
                   <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out "><Link to="/add-book">Add Book</Link></li>
                   <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out "><Link to="/book-status">Books</Link></li>
                   <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out "><Link to="/book-track">Book Track</Link></li>
-                  <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to="/">Sign out</Link></li>
+                  <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to={{pathname: '/sign-up', state: {from: 'signOut'}}}>Sign out</Link></li>
               </ul>
           </div>
-          : 
+          : role === "buyer" ?
           <div className="text-sm w-1/3  lg:w-3/12 xl:w-3/12 2xl:w-3/12">
             <ul className="text-gray-300 w-full">
-                <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to="/books">Home</Link></li>
+                <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to="/">Home</Link></li>
                 <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out "><Link to="/book-track">Book Track</Link></li>
-                <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to="/">Sign out</Link></li>
+                <li className="cursor-pointer hover:text-blue-400  transition duration-500 ease-in-out"><Link to={{pathname: '/sign-up', state: {from: 'signOut'}}}>Sign out</Link></li>
             </ul>
           </div>
+          : ""
             }
           </div>
           <div className="w-4/5 lg:w-3/12 xl:w-3/12 2xl:w-3/12">
@@ -77,6 +79,7 @@ function Footer(props) {
                 </div>
           </div>
         </div>
+
       </div>
     </div>
   );

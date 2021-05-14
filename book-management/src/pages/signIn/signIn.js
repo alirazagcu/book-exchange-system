@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Input from "../../components/input/input";
 import google from "../../assets/images/google.png";
 import fb from "../../assets/images/fb.png";
+import Nav from "../../components/navBar/navBar";
 import {
   BrowserRouter as Router,
   useHistory
@@ -61,7 +62,7 @@ function Signin() {
       setAuthorizationToken(add_confirmation.data.user.token)
       setOpen(false)
       history.push({
-        pathname: "/books"
+        pathname: "/"
       })
     }
     else if (add_confirmation.isLoading) {
@@ -82,7 +83,7 @@ function Signin() {
       localStorage.setItem('userName', sign_up_confirmation.data.user.userName);
       setAuthorizationToken(sign_up_confirmation.data.user.token)
       history.push({
-        pathname: "/books"
+        pathname: "/"
       })
       setOpen(false)
     }
@@ -176,7 +177,7 @@ function Signin() {
 
   return (
     <div>
-      <RoleModel open={open} handleCloseCallBack={handleClose} setSocialMediaRole={setSocialMediaRole}/>
+    <RoleModel open={open} handleCloseCallBack={handleClose} setSocialMediaRole={setSocialMediaRole}/>
       {isSnackbar && <SnackBarMsg snackBarSverity={snackBarSverity} snackBarMesssage={snackBarMesssage} setIsSnackBar={setIsSnackBar}/>}
       {
         isLoading? <Loader /> :
@@ -231,7 +232,7 @@ function Signin() {
           <div>
           <FacebookLogin
               appId="612706726351906"
-              autoLoad
+              autoLoad={false}
               callback={responseFacebook}
               render={renderProps => (
                 <button onClick={renderProps.onClick}

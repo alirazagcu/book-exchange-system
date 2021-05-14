@@ -524,7 +524,7 @@ export const searchByField = (data) => {
     return (dispatch) => {
         dispatch(searchByFieldLoading(true));
 
-        request.then((response) => {
+        request.then((response) => {    
             if (response.status == "200") {
                 dispatch({
                     type: SEARCH_BY_FIELD,
