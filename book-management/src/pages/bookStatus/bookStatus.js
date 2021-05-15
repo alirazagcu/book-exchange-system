@@ -15,6 +15,7 @@ import Loader from "../../components/Loader/Loader";
 import SnackBarMsg from "../../components/ErrorMessage/ErrorSnackBar";
 import { useDispatch, useSelector } from "react-redux";
 import setAuthorizationToken from "../../utils/authorization/authorization";
+import SearchBooKByStatus from "../../components/searchBook/searchBookByStatus";
 
 import {
   Card,
@@ -27,7 +28,10 @@ import {
   Badge,
   Input,
   Alert,
-  UncontrolledTooltip
+  UncontrolledTooltip,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText
 } from "reactstrap";
 
 const customStyles = {
@@ -59,6 +63,8 @@ const customStyles = {
 };
 function BookStatus(props) {
   const [isLoading, setIsLoading] = useState(false)
+  const [booksData, setBooksData] = useState([])
+  const [allBookData, setAllBookData] = useState([])
   const [isSnackbar, setIsSnackBar] = useState(false);
   const [snackBarMesssage, setSnackBarMessage] = useState("");
   const [snackBarSverity, setSnackBarSverity] = useState("error");
@@ -80,6 +86,8 @@ function BookStatus(props) {
   React.useEffect(() => {
     console.log(add_confirmation, "data")
     if (add_confirmation && add_confirmation.data && add_confirmation.data.success === true) {
+      setBooksData(add_confirmation.data.books)
+      setAllBookData(add_confirmation.data.books)
       setIsLoading(false)
     }
     else if (add_confirmation.isLoading) {
@@ -208,10 +216,11 @@ function BookStatus(props) {
           <Card className="mt-10 mx-auto" style={{width:"80%"}}>    
             <CardHeader>
               <CardTitle style={{fontSize:"2em", textAlign:"center", fontSize:"3em"}}>Books Status</CardTitle>
+              <SearchBooKByStatus booksData={allBookData} setBooksData={setBooksData} />
             </CardHeader>
             <CardBody>
               <DataTable
-                data={add_confirmation && add_confirmation.data.success === true && add_confirmation.data.books}
+                data={booksData}
                 columns={columns}
                 pagination
                 noHeader
