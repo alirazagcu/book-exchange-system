@@ -58,7 +58,7 @@ function Nav(props) {
             <div className="font-semibold hidden lg:block xl:block 2xl:block">
                 <ul className="flex m-0">
                     <li className="cursor-pointer hover:text-blue-400 border-b border-transparent hover:border-white transition duration-500 ease-in-out"><Link to="/sign-up">SignUp</Link></li>
-                    <li className="ml-5 cursor-pointer hover:text-blue-400 border-b border-transparent hover:border-white transition duration-500 ease-in-out "><Link to="/sign-in">SingIn</Link></li>
+                    <li className="ml-5 cursor-pointer hover:text-blue-400 border-b border-transparent hover:border-white transition duration-500 ease-in-out "><Link to="/sign-in">SignIn</Link></li>
                 </ul>
             </div>
             }
